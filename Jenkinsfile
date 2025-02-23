@@ -31,7 +31,9 @@ pipeline {
                 echo "logging into docker hub"
 
                 // login to docker hub
-                sh 'echo $DOCKER_HUB_TOKEN | docker login -u yashpatil1902 --password-stdin'
+		withCredentials([string(credentialsId: 'DOCKER_HUB_TOKEN', variable: 'DOCKER_HUB_TOKEN')]) {
+    			sh 'echo $DOCKER_HUB_TOKEN | docker login -u yashpatil1902 --password-stdin'
+		}
             }
         }
 
